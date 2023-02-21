@@ -7,6 +7,7 @@
 #include "Beer_Pong_Matrix.h"
 
 
+#define MID_LINE_1 (7*8)
 #define LAST_LINE_1 (14*8)
 #define NEXT_LINE_1 8
 
@@ -195,6 +196,12 @@ void setup_matrix(void)
  * - ligne 1 à 14
  * - colone 1 à 6
  * (Commence à la ligne/colone 0)
+ * 
+ * 2 boucles for a chaque fois pour afficher
+ * la ligne puis la colone (comme un 7_segment):
+ * - MID_LINE est le segment du milieu
+ * _ LAST_LINE est le segment du haut (le plus
+ *   loin du bord de la table)
 */
 
 static void print_0_1(void)
@@ -202,7 +209,7 @@ static void print_0_1(void)
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+14]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
   }
   for (int i = 9; i <= 9+LAST_LINE_1; i += NEXT_LINE_1)
   {
@@ -225,6 +232,25 @@ static void print_1_1(void)
   {
     leds[i]  = CRGB :: Red;
     leds[i+1]  = CRGB :: Red;
+  }
+}
+
+static void print_2_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+MID_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
+  }
+
+  for (int i = 14; i <= 14+MID_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = 9+MID_LINE_1; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
   }
 }
 
