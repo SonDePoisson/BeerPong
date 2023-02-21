@@ -34,32 +34,15 @@ const bool    kMatrixVertical = false;
 // Set 'kMatrixSerpentineLayout' to false if your pixels are 
 // laid out all running the same way, like this:
 //
-//     0 >  1 >  2 >  3 >  4
-//                         |
-//     .----<----<----<----'
+//     0 >  1 >  2 >  3 >  4 >  5 >  6 >  7
+//                                        |
+//     .----<----<----<--------<----<-----'
 //     |
-//     5 >  6 >  7 >  8 >  9
-//                         |
-//     .----<----<----<----'
+//     8 >  9 > 10 > 11 > 12 > 13 > 14 > 15
+//                                        |
+//     .----<----<----<--------<----<-----'
 //     |
-//    10 > 11 > 12 > 13 > 14
-//                         |
-//     .----<----<----<----'
-//     |
-//    15 > 16 > 17 > 18 > 19
-//                         |
-//     .----<----<----<----'
-//     |
-//    20 > 21 > 22 > 23 > 24
-//                         |
-//     .----<----<----<----'
-//     |
-//    25 > 26 > 27 > 28 > 29
-//                         |
-//     .----<----<----<----'
-//     |
-//    30 > 31 > 32 > 33 > 34
-//            .....
+//     
 //
 // Bonus vocabulary word: anything that goes one way 
 // in one row, and then backwards in the next row, and so on
@@ -225,6 +208,11 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
       break;
       
   case 2:
+    leds[6]  = CRGB :: Red;
+    leds[7]  = CRGB :: Red;
+    leds[8]  = CRGB :: Red;
+    leds[13]  = CRGB :: Red;
+    leds[13]  = CRGB :: Red;
       break;
       
   case 3:
