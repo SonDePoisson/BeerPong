@@ -211,13 +211,17 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
     leds[11]  = CRGB :: Red;
     leds[13]  = CRGB :: Red;
     leds[16]  = CRGB :: Red;
+    leds[17]  = CRGB :: Red;
     leds[18]  = CRGB :: Red;
-    leds[21]  = CRGB :: Red;
-    leds[22]  = CRGB :: Red;
-    leds[23]  = CRGB :: Red;
       break;
 
   case 1:
+    leds[6]  = CRGB :: Red;
+    leds[7]  = CRGB :: Red;
+    leds[8]  = CRGB :: Red;
+    leds[12]  = CRGB :: Red;
+    leds[16]  = CRGB :: Red;
+    leds[17]  = CRGB :: Red;
       break;
       
   case 2:
