@@ -42,7 +42,16 @@ const bool    kMatrixVertical = false;
 //                                        |
 //     .----<----<----<--------<----<-----'
 //     |
-//     
+//    16 > 17 > 18 > 19 > 20 > 21 > 22 > 23
+//                                        |
+//     .----<----<----<--------<----<-----'
+//     |
+//    +8 > +8 > +8 > +8 > +8 > +8 > +8 > +8
+//                                        |
+//     .----<----<----<--------<----<-----'
+//     |
+//                (32 lignes)
+//
 //
 // Bonus vocabulary word: anything that goes one way 
 // in one row, and then backwards in the next row, and so on
@@ -176,6 +185,25 @@ void setup_matrix(void)
   FastLED.setBrightness( BRIGHTNESS );
 }
 
+/**
+ * Affiche 0 de la :
+ * - ligne 1 à 14
+ * - colone 1 à 6
+*/
+static void print_0(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+14]  = CRGB :: Red;
+  }
+  for (int i = 17; i <= 17+14; i += 8)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+5]  = CRGB :: Red;
+  }
+}
+
 void print_score(uint8_t score_1, uint8_t score_2) //TODO
 {
   // Reset de la matrice de Bleu //
@@ -188,31 +216,15 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
   switch (score_1)
   {
   case 0:
-    leds[6]  = CRGB :: Red;
-    leds[7]  = CRGB :: Red;
-    leds[8]  = CRGB :: Red;
-    leds[11]  = CRGB :: Red;
-    leds[13]  = CRGB :: Red;
-    leds[16]  = CRGB :: Red;
-    leds[17]  = CRGB :: Red;
-    leds[18]  = CRGB :: Red;
+    print_0();
       break;
 
   case 1:
     leds[6]  = CRGB :: Red;
-    leds[7]  = CRGB :: Red;
-    leds[8]  = CRGB :: Red;
-    leds[12]  = CRGB :: Red;
-    leds[16]  = CRGB :: Red;
-    leds[17]  = CRGB :: Red;
       break;
       
   case 2:
     leds[6]  = CRGB :: Red;
-    leds[7]  = CRGB :: Red;
-    leds[8]  = CRGB :: Red;
-    leds[13]  = CRGB :: Red;
-    leds[13]  = CRGB :: Red;
       break;
       
   case 3:
