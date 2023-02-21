@@ -32,7 +32,7 @@
 
 // XYMatrix Fonctions //
 
-void setup_matrix(CRGB leds_matrix[])
+void setup_matrix(CRGB leds_matrix[]) //ToTest
 {
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds_matrix, NUM_LEDS_MATRIX).setCorrection(TypicalSMD5050);
   FastLED.setBrightness( BRIGHTNESS );
@@ -298,7 +298,7 @@ static void print_6_2(CRGB leds_matrix[])
   }
 }
 
-void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //TOTest
+void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 {
   // Reset de la matrice de Bleu //
   for (int i = 0; i < NUM_LEDS_MATRIX; i++)
@@ -375,7 +375,20 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //TOTest
   FastLED.show();
 }
 
-void print_animation(void)
+void print_animation(CRGB leds_matrix[])
 {
-  //TODO
+  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
+  {
+    leds_matrix[i]  = CRGB :: Black;
+  }
+  FastLED.show();
+
+  for (int i = 0; i < NUM_LEDS_MATRIX; i+=8)  //Effet Balayage
+  {
+    for (int j = 0; j < 8; i++)
+    {
+      leds_matrix[i+j]  = CRGB :: Red;
+    }
+    FastLED.show();
+  }
 }
