@@ -6,6 +6,10 @@
 
 #include "Beer_Pong_Matrix.h"
 
+
+#define LAST_LINE_1 (14*8)
+#define NEXT_LINE_1 8
+
 // Helper functions for an two-dimensional XY matrix of pixels.
 // Simple 2-D demo code is included as well.
 //
@@ -185,22 +189,42 @@ void setup_matrix(void)
   FastLED.setBrightness( BRIGHTNESS );
 }
 
+// Scores //
 /**
- * Affiche 0 de la :
+ * Affiche le score de la :
  * - ligne 1 à 14
  * - colone 1 à 6
+ * (Commence à la ligne/colone 0)
 */
-static void print_0(void)
+
+static void print_0_1(void)
 {
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
     leds[i+14]  = CRGB :: Red;
   }
-  for (int i = 17; i <= 17+14; i += 8)
+  for (int i = 9; i <= 9+LAST_LINE_1; i += NEXT_LINE_1)
   {
     leds[i]  = CRGB :: Red;
     leds[i+5]  = CRGB :: Red;
+  }
+}
+
+static void print_1_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+
+  leds[9+LAST_LINE_1]  = CRGB :: Red;
+  leds[10+LAST_LINE_1]  = CRGB :: Red;
+
+  for (int i = 11; i <= 11+LAST_LINE_1; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+1]  = CRGB :: Red;
   }
 }
 
@@ -216,11 +240,11 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
   switch (score_1)
   {
   case 0:
-    print_0();
+    print_0_1();
       break;
 
   case 1:
-    leds[6]  = CRGB :: Red;
+    print_1_1();
       break;
       
   case 2:
