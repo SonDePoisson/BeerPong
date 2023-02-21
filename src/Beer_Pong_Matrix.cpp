@@ -170,6 +170,7 @@ uint16_t XYsafe( uint8_t x, uint8_t y)
   return XY(x,y);
 }
 
+
 void DrawOneFrame( uint8_t startHue8, int8_t yHueDelta8, int8_t xHueDelta8)
 {
   uint8_t lineStartHue = startHue8;
@@ -192,91 +193,77 @@ void setup_matrix(void)
   FastLED.setBrightness( BRIGHTNESS );
 }
 
-void print_score(int equipe, int score) //TODO
+void print_score(uint8_t score_1, uint8_t score_2) //TODO
 {
-    switch (score)
-    {
-    case 0:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
+  // Reset de la matrice de Bleu //
+  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
+  {
+    leds[i]  = CRGB :: Blue;
+  }
+  
+  // Score Equipe 2 //
+  switch (score_1)
+  {
+  case 0:
+    leds[6]  = CRGB :: Red;
+    leds[7]  = CRGB :: Red;
+    leds[8]  = CRGB :: Red;
+    leds[11]  = CRGB :: Red;
+    leds[13]  = CRGB :: Red;
+    leds[16]  = CRGB :: Red;
+    leds[18]  = CRGB :: Red;
+    leds[21]  = CRGB :: Red;
+    leds[22]  = CRGB :: Red;
+    leds[23]  = CRGB :: Red;
+      break;
 
-    case 1:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-        
-    case 2:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-        
-    case 3:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-        
-    case 4:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-        
-    case 5:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-        
-    case 6:
-        if (equipe == 1)
-        {
-            /* code */
-        }
-        else
-        {
-            /* code */
-        }
-        break;
-    
-    
-    default:
-        break;
-    }
+  case 1:
+      break;
+      
+  case 2:
+      break;
+      
+  case 3:
+      break;
+      
+  case 4:
+      break;
+      
+  case 5:
+      break;
+      
+  case 6:
+      break;
+  default:
+      break;
+  }
+  // Score Equipe 2 //
+  switch (score_2)
+  {
+  case 0:
+      break;
+
+  case 1:
+      break;
+      
+  case 2:
+      break;
+      
+  case 3:
+      break;
+      
+  case 4:
+      break;
+      
+  case 5:
+      break;
+      
+  case 6:
+      break;
+  default:
+      break;
+  }
+  FastLED.show();
 }
 
 void print_animation(void)

@@ -24,7 +24,8 @@ uint16_t XY( uint8_t x, uint8_t y);
 uint16_t XYsafe( uint8_t x, uint8_t y);
 
 /**
- * Permet de dessiner sur la matrice ?
+ * Permet de dessiner un rectangle 
+ * Pas forcément nécessaire de l'utiliser
 */
 void DrawOneFrame( uint8_t startHue8, int8_t yHueDelta8, int8_t xHueDelta8);
 
@@ -43,7 +44,7 @@ void setup_matrix(void);
  * - Score de cette équipe
  * (Peut être utiliser DrawOneFrame)
 */
-void print_score(int equipe, int score);
+void print_score(uint8_t score_1, uint8_t score_2);
 
 /**
  * Affiche l'animation lorsque le score change

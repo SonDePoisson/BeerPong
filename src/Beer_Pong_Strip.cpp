@@ -18,5 +18,6 @@ void strip_animation(CRGB leds[]) //TODO
         else
             leds[i] = CRGB::Red;
         FastLED.show();
+        delay(10);
     }
 }

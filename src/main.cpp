@@ -4,19 +4,23 @@
 #include "Beer_Pong_Matrix.h"
 #include "Beer_Pong_Strip.h"
 
-#define NUM_LEDS_STRIP 1
-#define DATA_PIN 3
-
 // Leds //
-CRGB leds[NUM_LEDS_STRIP];
+CRGB leds_strip[NUM_LEDS_STRIP];
 
+// Equipes //
+#define EQUIPE_1 1
+#define EQUIPE_2 2
 
-void setup() { 
-  FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS_STRIP);
-  // setup_strip(leds);
-  // setup_matrix();
+// Scores //
+uint8_t score_1 = 6;
+uint8_t score_1 = 6;
+
+void setup() {
+  FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds_strip, NUM_LEDS_STRIP);
+  setup_strip(leds_strip);
+  setup_matrix();
 }
 
 void loop() { 
-  // strip_animation(leds);
+  strip_animation(leds_strip);
 }
