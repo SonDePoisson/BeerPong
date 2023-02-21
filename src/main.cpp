@@ -17,7 +17,6 @@ uint8_t score_1 = 6;
 uint8_t score_2 = 6;
 
 void setup() {
-  // FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds_strip, NUM_LEDS_STRIP);
   setup_strip(leds_strip);
   setup_matrix(leds_matrix);
 }
@@ -25,4 +24,8 @@ void setup() {
 void loop() { 
   strip_animation(leds_strip);
   print_score(score_1, score_2, leds_matrix);
+
+  // Si un verre est retiré 
+  if(0)
+    matrix_animation(leds_matrix);
 }

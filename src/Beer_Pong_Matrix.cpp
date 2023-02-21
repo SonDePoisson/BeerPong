@@ -375,7 +375,7 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
   FastLED.show();
 }
 
-void print_animation(CRGB leds_matrix[])
+void matrix_animation(CRGB leds_matrix[])
 {
   for (int i = 0; i < NUM_LEDS_MATRIX; i++)
   {

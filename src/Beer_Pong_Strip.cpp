@@ -6,7 +6,7 @@
 
 void setup_strip(CRGB leds[])
 {
-    FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS_STRIP);
+    FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS_STRIP);
 }
 
 void strip_animation(CRGB leds[]) //TODO
