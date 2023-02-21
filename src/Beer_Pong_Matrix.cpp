@@ -7,9 +7,12 @@
 #include "Beer_Pong_Matrix.h"
 
 
-#define MID_LINE_1 (7*8)
-#define LAST_LINE_1 (14*8)
-#define NEXT_LINE_1 8
+#define MID_LINE (7*8)
+#define LAST_LINE (14*8)
+#define NEXT_LINE 8
+
+#define START_LINE_2 (255 -8 -1)
+#define COLUMN_2 (255 -8 -1 -6)
 
 // Helper functions for an two-dimensional XY matrix of pixels.
 // Simple 2-D demo code is included as well.
@@ -204,14 +207,16 @@ void setup_matrix(void)
  *   loin du bord de la table)
 */
 
+// Equipe 1 //
+
 static void print_0_1(void)
 {
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
-  for (int i = 9; i <= 9+LAST_LINE_1; i += NEXT_LINE_1)
+  for (int i = 9; i <= 9+LAST_LINE; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
     leds[i+5]  = CRGB :: Red;
@@ -225,10 +230,10 @@ static void print_1_1(void)
     leds[i]  = CRGB :: Red;
   }
 
-  leds[9+LAST_LINE_1]  = CRGB :: Red;
-  leds[10+LAST_LINE_1]  = CRGB :: Red;
+  leds[9+LAST_LINE]  = CRGB :: Red;
+  leds[10+LAST_LINE]  = CRGB :: Red;
 
-  for (int i = 11; i <= 11+LAST_LINE_1; i += NEXT_LINE_1)
+  for (int i = 11; i <= 11+LAST_LINE; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
     leds[i+1]  = CRGB :: Red;
@@ -240,15 +245,15 @@ static void print_2_1(void)
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+MID_LINE_1]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+MID_LINE]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
 
-  for (int i = 14; i <= 14+MID_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 14; i <= 14+MID_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
-  for (int i = 9+MID_LINE_1; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 9+MID_LINE; i <= 9+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
@@ -259,11 +264,11 @@ static void print_3_1(void)
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+MID_LINE_1]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+MID_LINE]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
 
-  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 9; i <= 9+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
@@ -273,15 +278,15 @@ static void print_4_1(void)
 {
   for (int i = 9; i <= 14; i++)
   {
-    leds[i+MID_LINE_1]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+MID_LINE]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
 
-  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 9; i <= 9+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
-  for (int i = 14+MID_LINE_1; i <= 14+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 14+MID_LINE; i <= 14+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
@@ -292,15 +297,15 @@ static void print_5_1(void)
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+MID_LINE_1]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+MID_LINE]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
 
-  for (int i = 9; i <= 9+MID_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 9; i <= 9+MID_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
-  for (int i = 14+MID_LINE_1; i <= 14+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 14+MID_LINE; i <= 14+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
@@ -311,15 +316,138 @@ static void print_6_1(void)
   for (int i = 9; i <= 14; i++)
   {
     leds[i]  = CRGB :: Red;
-    leds[i+MID_LINE_1]  = CRGB :: Red;
-    leds[i+LAST_LINE_1]  = CRGB :: Red;
+    leds[i+MID_LINE]  = CRGB :: Red;
+    leds[i+LAST_LINE]  = CRGB :: Red;
   }
 
-  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 9; i <= 9+LAST_LINE ; i += NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
-  for (int i = 14; i <= 14+MID_LINE_1 ; i += NEXT_LINE_1)
+  for (int i = 14; i <= 14+MID_LINE ; i += NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+// Equipe 2 //
+
+static void print_0_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+  for (int i = START_LINE_2; i >= START_LINE_2 - LAST_LINE; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i - 5]  = CRGB :: Red;
+  }
+}
+
+static void print_1_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+
+  leds[START_LINE_2 - LAST_LINE]  = CRGB :: Red;
+  leds[START_LINE_2 - LAST_LINE - 1]  = CRGB :: Red;
+
+  for (int i = START_LINE_2 - 2; i >= START_LINE_2 - 2 - LAST_LINE; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-1]  = CRGB :: Red;
+  }
+}
+
+static void print_2_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-MID_LINE]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+
+  for (int i = COLUMN_2; i >= COLUMN_2-MID_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = START_LINE_2-MID_LINE; i >= START_LINE_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_3_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-MID_LINE]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+
+  for (int i = START_LINE_2; i >= START_LINE_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_4_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i-MID_LINE]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+
+  for (int i = START_LINE_2; i >= START_LINE_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = COLUMN_2-MID_LINE; i <= COLUMN_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_5_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-MID_LINE]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+
+  for (int i = START_LINE_2; i >= START_LINE_2-MID_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = COLUMN_2-MID_LINE; i >= COLUMN_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_6_2(void)
+{
+  for (int i = START_LINE_2; i >= COLUMN_2; i--)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i-MID_LINE]  = CRGB :: Red;
+    leds[i-LAST_LINE]  = CRGB :: Red;
+  }
+
+  for (int i = START_LINE_2; i >= START_LINE_2-LAST_LINE ; i -= NEXT_LINE)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = COLUMN_2; i >= COLUMN_2-MID_LINE ; i -= NEXT_LINE)
   {
     leds[i]  = CRGB :: Red;
   }
@@ -370,24 +498,31 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
   switch (score_2)
   {
   case 0:
+    print_0_2();
       break;
 
   case 1:
+    print_1_2();
       break;
       
   case 2:
+    print_2_2();
       break;
       
   case 3:
+    print_3_2();
       break;
       
   case 4:
+    print_4_2();
       break;
       
   case 5:
+    print_5_2();
       break;
       
   case 6:
+    print_6_2();
       break;
   default:
       break;
