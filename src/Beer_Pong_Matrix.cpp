@@ -254,6 +254,77 @@ static void print_2_1(void)
   }
 }
 
+static void print_3_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+MID_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
+  }
+
+  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_4_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i+MID_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
+  }
+
+  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = 14+MID_LINE_1; i <= 14+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_5_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+MID_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
+  }
+
+  for (int i = 9; i <= 9+MID_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = 14+MID_LINE_1; i <= 14+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
+static void print_6_1(void)
+{
+  for (int i = 9; i <= 14; i++)
+  {
+    leds[i]  = CRGB :: Red;
+    leds[i+MID_LINE_1]  = CRGB :: Red;
+    leds[i+LAST_LINE_1]  = CRGB :: Red;
+  }
+
+  for (int i = 9; i <= 9+LAST_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+  for (int i = 14; i <= 14+MID_LINE_1 ; i += NEXT_LINE_1)
+  {
+    leds[i]  = CRGB :: Red;
+  }
+}
+
 void print_score(uint8_t score_1, uint8_t score_2) //TODO
 {
   // Reset de la matrice de Bleu //
@@ -274,19 +345,23 @@ void print_score(uint8_t score_1, uint8_t score_2) //TODO
       break;
       
   case 2:
-    leds[6]  = CRGB :: Red;
+    print_2_1();
       break;
       
   case 3:
+    print_3_1();
       break;
       
   case 4:
+    print_4_1();
       break;
       
   case 5:
+    print_5_1();
       break;
       
   case 6:
+    print_6_1();
       break;
   default:
       break;
