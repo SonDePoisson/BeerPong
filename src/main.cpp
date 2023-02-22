@@ -19,6 +19,7 @@ CRGB leds_matrix[ NUM_LEDS_MATRIX ];
 // Scores //
 uint8_t score_1 = 6;
 uint8_t score_2 = 6;
+uint8_t count = 0;
 
 void setup() {
   // LED Init //
@@ -32,16 +33,24 @@ void loop() {
   strip_animation(leds_strip);
   print_score(score_1, score_2, leds_matrix);
 
-  // Si un verre est retiré 
-  // for (size_t i = 0; i < NUM_SENSOR; i++)
-  // {
-  //   if(analogRead(A0 + i) == 0)
-  //   {
-  //     matrix_animation(leds_matrix);
-  //     if (i < NUM_SENSOR/2)
-  //       score_1--;
-  //     else
-  //       score_2--;
-  //   } 
-  // }
+  // Action Capteurs //
+  for (int i = 0; i < NUM_SENSOR; i++)
+  {
+    // Compte des capteurs recouvert //
+    if(analogRead(A0 + i) != 0)
+    {
+      count++;
+    }
+    // Comparaison Capteurs recouverts avec score pour mettre à jour //
+    if (count < (score_1 + score_2))
+    {
+      matrix_animation(leds_matrix);
+      if (i < NUM_SENSOR/2)
+        score_1--;
+      else
+        score_2--;
+    }
+    count = 0;
+  }
+  
 }
