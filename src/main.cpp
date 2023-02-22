@@ -37,7 +37,7 @@ void loop() {
   for (int i = 0; i < NUM_SENSOR; i++)
   {
     // Compte des capteurs recouvert //
-    if(analogRead(A0 + i) != 0)
+    if((analogRead(A0 + i) > 0) && (analogRead(A0 + i) < 256))
     {
       count++;
     }
