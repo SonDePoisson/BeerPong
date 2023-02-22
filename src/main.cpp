@@ -8,6 +8,10 @@
 #define EQUIPE_1 1
 #define EQUIPE_2 2
 
+// Capteurs //
+#define NUM_SENSOR 12
+#define BAUD 9600
+
 // Leds //
 CRGB leds_strip[NUM_LEDS_STRIP];
 CRGB leds_matrix[ NUM_LEDS_MATRIX ];
@@ -17,8 +21,11 @@ uint8_t score_1 = 6;
 uint8_t score_2 = 6;
 
 void setup() {
+  // LED Init //
   setup_strip(leds_strip);
   setup_matrix(leds_matrix);
+  // Init Com Capteurs //
+  Serial.begin(BAUD);
 }
 
 void loop() { 
@@ -26,6 +33,15 @@ void loop() {
   print_score(score_1, score_2, leds_matrix);
 
   // Si un verre est retiré 
-  if(0)
-    matrix_animation(leds_matrix);
+  // for (size_t i = 0; i < NUM_SENSOR; i++)
+  // {
+  //   if(analogRead(A0 + i) == 0)
+  //   {
+  //     matrix_animation(leds_matrix);
+  //     if (i < NUM_SENSOR/2)
+  //       score_1--;
+  //     else
+  //       score_2--;
+  //   } 
+  // }
 }
