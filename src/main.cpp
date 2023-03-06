@@ -27,9 +27,13 @@ void setup() {
   setup_matrix(leds_matrix);
   // Init Com Capteurs //
   Serial.begin(BAUD);
+  // Print US
+  matrix_animation(leds_matrix);
 }
 
 void loop() { 
+  leds_matrix[1]  = CRGB :: Red;
+  FastLED.show();
   strip_animation(leds_strip);
   print_score(score_1, score_2, leds_matrix);
 

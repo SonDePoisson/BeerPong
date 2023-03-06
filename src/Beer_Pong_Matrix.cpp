@@ -30,6 +30,7 @@
 //  i = kMatrixHeight * (kMatrixWidth - (x+1))+y;
 
 
+
 // XYMatrix Fonctions //
 
 void setup_matrix(CRGB leds_matrix[]) //ToTest
@@ -298,6 +299,15 @@ static void print_6_2(CRGB leds_matrix[])
   }
 }
 
+static void clear_matrix(CRGB leds_matrix[])
+{
+  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
+  {
+    leds_matrix[i]  = CRGB :: Blue;
+  }
+  FastLED.show();
+}
+
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 {
   // Reset de la matrice de Bleu //
@@ -375,20 +385,47 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
   FastLED.show();
 }
 
-void matrix_animation(CRGB leds_matrix[])
+void print_US(CRGB leds_matrix[], int start_idx)
 {
-  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
+  // U
+  for (int i = start_idx; i < start_idx + 5; i++)
   {
-    leds_matrix[i]  = CRGB :: Black;
+    leds_matrix[i]  = CRGB :: Red;
   }
-  FastLED.show();
-
-  for (int i = 0; i < NUM_LEDS_MATRIX; i+=8)  //Effet Balayage
+  leds_matrix[start_idx + NEXT_LINE]  = CRGB :: Red;
+  for (int i = start_idx + 2*NEXT_LINE; i < start_idx + 2*NEXT_LINE + 5; i++)
   {
-    for (int j = 0; j < 8; i++)
+    leds_matrix[i]  = CRGB :: Red;
+  }
+
+  // S
+  for (int i = start_idx + 4*NEXT_LINE; i < start_idx + 4*NEXT_LINE + 5; i+=2)
+  {
+    for (int j = 0; i < 3; j++)
     {
       leds_matrix[i+j]  = CRGB :: Red;
     }
-    FastLED.show();
+  }
+  leds_matrix[start_idx + 4*NEXT_LINE + 4]  = CRGB :: Red;
+  leds_matrix[start_idx + 6*NEXT_LINE + 4]  = CRGB :: Red;
+
+  // Print
+  FastLED.show();
+}
+
+void matrix_animation(CRGB leds_matrix[])
+{
+  clear_matrix(leds_matrix);
+
+  for (int i = 0; i < NUM_LEDS_MATRIX; i+=8)  //Effet Balayage
+  {
+
+    print_US(leds_matrix, i);
+
+    // for (int j = 0; j < 8; i++)
+    // {
+    //   leds_matrix[i+j]  = CRGB :: Red;
+    // }
+    // FastLED.show();
   }
 }
