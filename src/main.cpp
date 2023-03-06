@@ -19,8 +19,42 @@ CRGB leds_matrix[ NUM_LEDS_MATRIX ];
 // Scores //
 uint8_t score_1 = 6;
 uint8_t score_2 = 6;
-uint8_t count = 0;
 
+
+// Sensors Functions //
+/**
+ * Lis le nombre de capteur retournant une valeur 
+ * Compare au score affiché
+ * S'il est différent :
+ * - affiche les animations
+ * - met à jour le score
+*/
+void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
+{
+  uint8_t count = 0;
+
+  for (int i = 0; i < NUM_SENSOR; i++)
+  {
+    // Compte des capteurs recouvert //
+    if((analogRead(A0 + i) > 0) && (analogRead(A0 + i) < 256))
+    {
+      count++;
+    }
+    // Comparaison Capteurs recouverts avec score pour mettre à jour //
+    if (count < (score_1 + score_2))
+    {
+      strip_animation(leds_strip);
+      matrix_animation(leds_matrix);
+      if (i < NUM_SENSOR/2)
+        score_1--;
+      else
+        score_2--;
+    }
+    count = 0;
+  }
+}
+
+// Main //
 void setup() {
   // LED Init //
   setup_strip(leds_strip);
@@ -32,29 +66,7 @@ void setup() {
 }
 
 void loop() { 
-  leds_matrix[1]  = CRGB :: Red;
-  FastLED.show();
-  strip_animation(leds_strip);
   print_score(score_1, score_2, leds_matrix);
-
-  // Action Capteurs //
-  for (int i = 0; i < NUM_SENSOR; i++)
-  {
-    // Compte des capteurs recouvert //
-    if((analogRead(A0 + i) > 0) && (analogRead(A0 + i) < 256))
-    {
-      count++;
-    }
-    // Comparaison Capteurs recouverts avec score pour mettre à jour //
-    if (count < (score_1 + score_2))
-    {
-      matrix_animation(leds_matrix);
-      if (i < NUM_SENSOR/2)
-        score_1--;
-      else
-        score_2--;
-    }
-    count = 0;
-  }
-  
+  strip_ambient(leds_strip);
+  read_sensors(leds_matrix, leds_strip);
 }

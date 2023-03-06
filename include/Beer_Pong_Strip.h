@@ -12,6 +12,10 @@
 */
 void setup_strip(CRGB leds[]);
 
+/**
+ * Affichage ambiant des leds
+*/
+void strip_ambient(CRGB leds[]);
 
 /**
  * Réalise une animation
