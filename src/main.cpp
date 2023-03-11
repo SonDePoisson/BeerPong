@@ -17,7 +17,7 @@ CRGB leds_strip[NUM_LEDS_STRIP];
 CRGB leds_matrix[NUM_LEDS_MATRIX];
 
 // Scores //
-uint8_t score_1 = 5;
+uint8_t score_1 = 6;
 uint8_t score_2 = 1;
 
 
