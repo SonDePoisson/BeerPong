@@ -17,8 +17,8 @@ CRGB leds_strip[NUM_LEDS_STRIP];
 CRGB leds_matrix[NUM_LEDS_MATRIX];
 
 // Scores //
-uint8_t score_1 = 2;
-uint8_t score_2 = 2;
+uint8_t score_1 = 5;
+uint8_t score_2 = 1;
 
 
 // Sensors Functions //
@@ -68,7 +68,7 @@ void setup() {
 
 void loop() {
   Serial.print("Testing connection\n");
-  delay(5000);
+  delay(1000);
   // clear_matrix(leds_matrix); 
   print_score(score_1, score_2, leds_matrix);
   // matrix_animation(leds_matrix);
