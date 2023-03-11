@@ -14,11 +14,11 @@
 
 // Leds //
 CRGB leds_strip[NUM_LEDS_STRIP];
-CRGB leds_matrix[ NUM_LEDS_MATRIX ];
+CRGB leds_matrix[NUM_LEDS_MATRIX];
 
 // Scores //
-uint8_t score_1 = 6;
-uint8_t score_2 = 6;
+uint8_t score_1 = 2;
+uint8_t score_2 = 2;
 
 
 // Sensors Functions //
@@ -56,17 +56,22 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
 
 // Main //
 void setup() {
+  // Init Com Capteurs //
+  Serial.begin(BAUD);
+  Serial.print("Hello World\n");
   // LED Init //
   setup_strip(leds_strip);
   setup_matrix(leds_matrix);
-  // Init Com Capteurs //
-  Serial.begin(BAUD);
-  // Print US
-  matrix_animation(leds_matrix);
+  // Print US //
+  // matrix_animation(leds_matrix);
 }
 
-void loop() { 
+void loop() {
+  Serial.print("Testing connection\n");
+  delay(5000);
+  // clear_matrix(leds_matrix); 
   print_score(score_1, score_2, leds_matrix);
-  strip_ambient(leds_strip);
-  read_sensors(leds_matrix, leds_strip);
+  // matrix_animation(leds_matrix);
+  // strip_ambient(leds_strip);
+  // read_sensors(leds_matrix, leds_strip);
 }

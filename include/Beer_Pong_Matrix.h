@@ -1,5 +1,5 @@
 
-#define LED_PIN  4
+#define LED_PIN  3
 #define NUM_LEDS_MATRIX 256
 
 #define COLOR_ORDER GRB
@@ -7,11 +7,11 @@
 
 #define BRIGHTNESS 64
 
-#define MID_LINE (7*8)
-#define LAST_LINE (14*8)
+#define MID_LINE (6*8)
+#define LAST_LINE (12*8)
 #define NEXT_LINE 8
 #define START_LINE_2 (255 -8 -1)
-#define COLUMN_2 (255 -8 -1 -6)
+#define COLUMN_2 (255 -8 -6)
 
 
 // XYMatrix functions //
@@ -40,3 +40,8 @@ void print_US(CRGB leds_matrix[], int start_idx);
  * (Peut être utiliser DrawOneFrame)
 */
 void matrix_animation(CRGB leds_matrix[]);
+
+/**
+ * Met toutes les leds en bleu
+*/
+void clear_matrix(CRGB leds_matrix[]);

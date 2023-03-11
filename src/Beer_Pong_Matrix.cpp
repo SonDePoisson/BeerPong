@@ -299,13 +299,12 @@ static void print_6_2(CRGB leds_matrix[])
   }
 }
 
-static void clear_matrix(CRGB leds_matrix[])
+void clear_matrix(CRGB leds_matrix[])
 {
   for (int i = 0; i < NUM_LEDS_MATRIX; i++)
   {
     leds_matrix[i]  = CRGB :: Blue;
   }
-  FastLED.show();
 }
 
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
@@ -415,12 +414,13 @@ void print_US(CRGB leds_matrix[], int start_idx)
 
 void matrix_animation(CRGB leds_matrix[])
 {
-  clear_matrix(leds_matrix);
 
   for (int i = 0; i < NUM_LEDS_MATRIX; i+=8)  //Effet Balayage
   {
 
+    clear_matrix(leds_matrix);
     print_US(leds_matrix, i);
+    delay(100);
 
     // for (int j = 0; j < 8; i++)
     // {
