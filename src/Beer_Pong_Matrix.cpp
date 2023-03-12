@@ -16,6 +16,10 @@ void setup_matrix(CRGB leds_matrix[]) //ToTest
   FastLED.show();
 }
 
+unsigned long getLed(int x, int y) {
+  return (y + (y % 2)) * WIDTH + (2 * ((y + 1) % 2) - 1) * (x + (y % 2));
+} 
+
 // Scores //
 /**
  * Affiche le score de la :
@@ -212,12 +216,23 @@ static void print_0_2(CRGB leds_matrix[])
   for (int i = START_LINE_2; i >= COLUMN_2; i--)
   {
     leds_matrix[i]  = COlOR_1;
-    leds_matrix[i-LAST_LINE]  = COlOR_1;
+    leds_matrix[i - LAST_LINE]  = COlOR_1;
+    leds_matrix[i - NEXT_LINE]  = COlOR_1;
+    leds_matrix[i - NEXT_LINE - LAST_LINE]  = COlOR_1;
   }
-  for (int i = START_LINE_2; i >= START_LINE_2 - LAST_LINE; i -= NEXT_LINE)
+  
+  for (int i = 1; i <= 6; i++)
   {
-    leds_matrix[i]  = COlOR_1;
-    leds_matrix[i - 5]  = COlOR_1;
+    leds_matrix[START_LINE_2 - i*LONG_CORNER] = COlOR_1;
+    leds_matrix[START_LINE_2 - i*LONG_CORNER + SHORT_CORNER] = COlOR_1;
+    leds_matrix[START_LINE_2 - i*LONG_CORNER -1] = COlOR_1;
+    leds_matrix[START_LINE_2 - i*LONG_CORNER + SHORT_CORNER +1] = COlOR_1;
+  }
+
+  for (size_t i = 17; i < 29; i++)
+  {
+    leds_matrix[getLed(1, i)] = COlOR_1;
+    leds_matrix[getLed(2, i)] = COlOR_1;
   }
 }
 

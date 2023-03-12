@@ -20,6 +20,9 @@
 #define COlOR_1 CRGB :: DarkOrange
 #define COlOR_2 CRGB :: DarkBlue
 
+#define HIGH 32
+#define WIDTH 8
+
 
 // XYMatrix functions //
 
@@ -27,6 +30,11 @@
  * Instancie les Leds et la luminosité
 */
 void setup_matrix(CRGB leds_matrix[]);
+
+/**
+ * Retourne la led en position XY
+*/
+unsigned long getLed(int x, int y);
 
 /**
  * Affiche sur Score sur la Matrice 8x32

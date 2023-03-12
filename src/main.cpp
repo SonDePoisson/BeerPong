@@ -69,8 +69,13 @@ void setup() {
 void loop() {
   Serial.print("Testing connection\n");
   delay(1000);
-  // clear_matrix(leds_matrix); 
+  // clear_matrix(leds_matrix);
   print_score(score_1, score_2, leds_matrix);
+  score_1++;
+  if (score_1 > 6)
+  {
+    score_1 = 0;
+  } 
   // matrix_animation(leds_matrix);
   // strip_ambient(leds_strip);
   // read_sensors(leds_matrix, leds_strip);
