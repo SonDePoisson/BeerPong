@@ -18,7 +18,7 @@ CRGB leds_matrix[NUM_LEDS_MATRIX];
 
 // Scores //
 uint8_t score_1 = 0;
-uint8_t score_2 = 1;
+uint8_t score_2 = 6;
 
 
 // Sensors Functions //
@@ -72,9 +72,11 @@ void loop() {
   // clear_matrix(leds_matrix);
   print_score(score_1, score_2, leds_matrix);
   score_1++;
+  score_2--;
   if (score_1 > 6)
   {
     score_1 = 0;
+    score_2 = 6;
   } 
   // matrix_animation(leds_matrix);
   // strip_ambient(leds_strip);
