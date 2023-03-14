@@ -70,16 +70,16 @@ void loop() {
   // Serial.print("Testing connection\n");
   // delay(1000);
   // clear_matrix(leds_matrix);
-  // print_score(score_1, score_2, leds_matrix);
-  // delay(3000);
-  // score_1++;
-  // score_2--;
-  // if (score_1 > 6)
-  // {
-  //   score_1 = 0;
-  //   score_2 = 6;
-  // } 
-  // print_US(leds_matrix, COlOR_1);
+  print_score(score_1, score_2, leds_matrix);
+  delay(3000);
+  score_1++;
+  score_2--;
+  if (score_1 > 6)
+  {
+    score_1 = 0;
+    score_2 = 6;
+  } 
+  print_US(leds_matrix, COlOR_1);
   matrix_animation_serpent(leds_matrix, COlOR_1);
   matrix_animation_ligne(leds_matrix, COlOR_2, COlOR_1);
   // strip_ambient(leds_strip);

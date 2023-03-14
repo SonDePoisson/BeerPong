@@ -661,13 +661,14 @@ void matrix_animation_ligne(CRGB leds_matrix[], long color_clear, long color_dra
   clear_matrix(leds_matrix, color_clear);
   FastLED.show();
 
-  for (int i = 0; i < WIDTH; i++)
+  for (int i = 0; i < HIGH_MATRIX+5*8; i++)
   {
-    for (int j = -1; j < i; j++)
+    for (int j = 0; j < i+1; j++)
     {
-      leds_matrix[getLed(i, j)] = color_draw;
-      delay(25);
+      leds_matrix[(getLed(i-j, j))] = color_draw;
+      delay(1);
+      FastLED.show();
     }
-    FastLED.show();
+    
   }
 }

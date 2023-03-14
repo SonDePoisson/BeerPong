@@ -17,7 +17,7 @@
 #define COLUMN_1 14
 #define COLUMN_2 (255 -8 -6)
 
-#define COlOR_1 CRGB :: DarkRed
+#define COlOR_1 CRGB :: DarkOrange
 #define COlOR_2 CRGB :: DarkBlue
 
 #define HIGH_MATRIX 32
