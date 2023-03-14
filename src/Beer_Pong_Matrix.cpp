@@ -6,6 +6,37 @@
 
 #include "Beer_Pong_Matrix.h"
 
+//Dictionnaire pour defilement
+const PROGMEM int dico[27][6] = {
+		{0b01111110, 0b10010000, 0b10010000, 0b10010000, 0b01111110, 0b00000000},
+		{0b11111110, 0b10010010, 0b10010010, 0b10010010, 0b01111100, 0b00000000},
+		{0b01111100, 0b10000010, 0b10000010, 0b10000010, 0b01000100, 0b00000000},
+		{0b11111110, 0b10000010, 0b10000010, 0b10000010, 0b01111100, 0b00000000},
+		{0b11111110, 0b10010010, 0b10010010, 0b10010010, 0b10000010, 0b00000000},
+		{0b11111110, 0b10010000, 0b10010000, 0b10010000, 0b10000000, 0b00000000},
+		{0b01111100, 0b10000010, 0b10000010, 0b10001010, 0b10001110, 0b00000000},
+		{0b11111110, 0b00010000, 0b00010000, 0b00010000, 0b11111110, 0b00000000},
+		{0b00000000, 0b10000010, 0b11111110, 0b10000010, 0b00000000, 0b00000000},
+		{0b00000100, 0b00000010, 0b10000010, 0b11111100, 0b10000000, 0b00000000},
+		{0b11111110, 0b00010000, 0b00101000, 0b01000100, 0b10000010, 0b00000000},
+		{0b11111110, 0b00000010, 0b00000010, 0b00000010, 0b00000010, 0b00000000},
+		{0b11111110, 0b01100000, 0b00110000, 0b01100000, 0b11111110, 0b00000000},
+		{0b11111110, 0b01100000, 0b00110000, 0b00011000, 0b11111110, 0b00000000},
+		{0b01111100, 0b10000010, 0b10000010, 0b10000010, 0b01111100, 0b00000000},
+		{0b11111110, 0b10010000, 0b10010000, 0b10010000, 0b01100000, 0b00000000},
+		{0b01111100, 0b10000010, 0b10001010, 0b10000100, 0b01111010, 0b00000000},
+		{0b11111110, 0b10010000, 0b10010000, 0b10011000, 0b01100110, 0b00000000},
+		{0b01100100, 0b10010010, 0b10010010, 0b10010010, 0b01001100, 0b00000000},
+		{0b10000000, 0b10000000, 0b11111110, 0b10000000, 0b10000000, 0b00000000},
+		{0b11111100, 0b00000010, 0b00000010, 0b00000010, 0b11111100, 0b00000000},
+		{0b11100000, 0b00111000, 0b00001110, 0b00111000, 0b11100000, 0b00000000},
+		{0b11111000, 0b00001110, 0b00111000, 0b00001110, 0b11111000, 0b00000000},
+		{0b11000110, 0b00101000, 0b00010000, 0b00101000, 0b11000110, 0b00000000},
+		{0b11100000, 0b00010000, 0b00011110, 0b00010000, 0b11100000, 0b00000000},
+		{0b10000110, 0b10001010, 0b10010010, 0b10100010, 0b11000010, 0b00000000},
+		{0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}
+};
+
 // XYMatrix Fonctions //
 
 void setup_matrix(CRGB leds_matrix[]) //ToTest
@@ -19,6 +50,7 @@ void setup_matrix(CRGB leds_matrix[]) //ToTest
 unsigned long getLed(int x, int y) {
   return (y + (y % 2)) * WIDTH + (2 * ((y + 1) % 2) - 1) * (x + (y % 2));
 } 
+
 
 // Scores //
 /**
@@ -378,10 +410,7 @@ void clear_matrix(CRGB leds_matrix[])
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 {
   // Reset de la matrice de Bleu //
-  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
-  {
-    leds_matrix[i]  = COlOR_2;
-  }
+  clear_matrix(leds_matrix);
   
   // Score Equipe 2 //
   switch (score_1)
@@ -452,32 +481,45 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
   FastLED.show();
 }
 
-void print_US(CRGB leds_matrix[], int start_idx)
+
+
+// ANIMATION //
+void print_US(CRGB leds_matrix[])
 {
-  // U
-  for (int i = start_idx; i < start_idx + 5; i++)
+  for (int j = 0; j < 17; j++)
   {
-    leds_matrix[i]  = COlOR_1;
-  }
-  leds_matrix[start_idx + NEXT_LINE]  = COlOR_1;
-  for (int i = start_idx + 2*NEXT_LINE; i < start_idx + 2*NEXT_LINE + 5; i++)
-  {
-    leds_matrix[i]  = COlOR_1;
-  }
-
-  // S
-  for (int i = start_idx + 4*NEXT_LINE; i < start_idx + 4*NEXT_LINE + 5; i+=2)
-  {
-    for (int j = 0; i < 3; j++)
+    clear_matrix(leds_matrix);
+    // Lettre U //
+    for (int i = 0; i < 8; i++)
     {
-      leds_matrix[i+j]  = COlOR_1;
+      leds_matrix[getLed(i, 0+j)] = COlOR_1;
+      leds_matrix[getLed(i, 1+j)] = COlOR_1;
+      leds_matrix[getLed(i, 5+j)] = COlOR_1;
+      leds_matrix[getLed(i, 6+j)] = COlOR_1;
     }
+    for (int i = 0+j; i < 7+j; i++)
+    {
+      leds_matrix[getLed(7, i)] = COlOR_1;
+      leds_matrix[getLed(6, i)] = COlOR_1;
+    }
+    
+    // Lettre S //
+    leds_matrix[getLed(2, 9+j)] = COlOR_1;
+    leds_matrix[getLed(2, 10+j)] = COlOR_1;
+    leds_matrix[getLed(5, 14+j)] = COlOR_1;
+    leds_matrix[getLed(5, 15+j)] = COlOR_1;
+    for (int i = 9+j; i < 16+j; i++)
+    {
+      leds_matrix[getLed(0, i)] = COlOR_1;
+      leds_matrix[getLed(1, i)] = COlOR_1;
+      leds_matrix[getLed(3, i)] = COlOR_1;
+      leds_matrix[getLed(4, i)] = COlOR_1;
+      leds_matrix[getLed(6, i)] = COlOR_1;
+      leds_matrix[getLed(7, i)] = COlOR_1;
+    }
+    FastLED.show();
+    delay(250);
   }
-  leds_matrix[start_idx + 4*NEXT_LINE + 4]  = COlOR_1;
-  leds_matrix[start_idx + 6*NEXT_LINE + 4]  = COlOR_1;
-
-  // Print
-  FastLED.show();
 }
 
 void matrix_animation(CRGB leds_matrix[])
@@ -487,7 +529,7 @@ void matrix_animation(CRGB leds_matrix[])
   {
 
     clear_matrix(leds_matrix);
-    print_US(leds_matrix, i);
+    print_US(leds_matrix);
     delay(100);
 
     // for (int j = 0; j < 8; i++)

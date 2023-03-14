@@ -17,11 +17,17 @@
 #define COLUMN_1 14
 #define COLUMN_2 (255 -8 -6)
 
-#define COlOR_1 CRGB :: DarkOrange
+#define COlOR_1 CRGB :: DarkRed
 #define COlOR_2 CRGB :: DarkBlue
 
-#define HIGH 32
+#define HIGH_MATRIX 32
 #define WIDTH 8
+
+#define Xmax 32
+#define nbLettre 8
+#define XLettremax 2
+#define YLettremax 8
+#define nbLed 256
 
 
 // XYMatrix functions //
@@ -46,9 +52,9 @@ unsigned long getLed(int x, int y);
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]);
 
 /**
- * Affiche les lettre US à partir d'une certaine case
+ * 
 */
-void print_US(CRGB leds_matrix[], int start_idx);
+void print_US(CRGB leds_matrix[]);
 
 /**
  * Affiche l'animation lorsque le score change
