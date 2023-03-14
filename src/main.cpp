@@ -44,7 +44,7 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
     if (count < (score_1 + score_2))
     {
       strip_animation(leds_strip);
-      matrix_animation_serpent(leds_matrix);
+      matrix_animation_serpent(leds_matrix, COlOR_1);
       if (i < NUM_SENSOR/2)
         score_1--;
       else
@@ -63,24 +63,24 @@ void setup() {
   setup_strip(leds_strip);
   setup_matrix(leds_matrix);
   // Print US //
-  print_US(leds_matrix, COlOR_1);
+  // print_US(leds_matrix, COlOR_1);
 }
 
 void loop() {
   // Serial.print("Testing connection\n");
   // delay(1000);
   // clear_matrix(leds_matrix);
-  print_score(score_1, score_2, leds_matrix);
-  delay(3000);
-  score_1++;
-  score_2--;
-  if (score_1 > 6)
-  {
-    score_1 = 0;
-    score_2 = 6;
-  } 
-  print_US(leds_matrix, COlOR_1);
-  matrix_animation_serpent(leds_matrix);
+  // print_score(score_1, score_2, leds_matrix);
+  // delay(3000);
+  // score_1++;
+  // score_2--;
+  // if (score_1 > 6)
+  // {
+  //   score_1 = 0;
+  //   score_2 = 6;
+  // } 
+  // print_US(leds_matrix, COlOR_1);
+  matrix_animation_serpent(leds_matrix, COlOR_1);
   matrix_animation_ligne(leds_matrix, COlOR_2, COlOR_1);
   // strip_ambient(leds_strip);
   // read_sensors(leds_matrix, leds_strip);

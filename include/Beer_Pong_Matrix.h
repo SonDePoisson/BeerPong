@@ -59,7 +59,7 @@ void print_US(CRGB leds_matrix[], long color);
 /**
  * 
 */
-void matrix_animation_serpent(CRGB leds_matrix[]);
+void matrix_animation_serpent(CRGB leds_matrix[], long color);
 
 /**
  * 
