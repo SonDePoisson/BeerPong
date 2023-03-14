@@ -643,7 +643,31 @@ void print_US(CRGB leds_matrix[], long color)
   }
 }
 
-void matrix_animation(CRGB leds_matrix[])
+void matrix_animation_serpent(CRGB leds_matrix[])
 {
-  
+  clear_matrix(leds_matrix, CRGB::Black);
+  FastLED.show();
+
+  for (int i = 0; i < NUM_LEDS_MATRIX; i++)
+  {
+    leds_matrix[i] = couleurs[rand()%148];
+    FastLED.show();
+    delay(25);
+  }
+}
+
+void matrix_animation_ligne(CRGB leds_matrix[], long color_clear, long color_draw)
+{
+  clear_matrix(leds_matrix, color_clear);
+  FastLED.show();
+
+  for (int i = 0; i < WIDTH; i++)
+  {
+    for (int j = -1; j < i; j++)
+    {
+      leds_matrix[getLed(i, j)] = color_draw;
+    }
+    FastLED.show();
+    delay(25);
+  }
 }

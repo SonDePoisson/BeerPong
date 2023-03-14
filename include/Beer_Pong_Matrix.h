@@ -57,10 +57,14 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]);
 void print_US(CRGB leds_matrix[], long color);
 
 /**
- * Affiche l'animation lorsque le score change
- * (Peut être utiliser DrawOneFrame)
+ * 
 */
-void matrix_animation(CRGB leds_matrix[]);
+void matrix_animation_serpent(CRGB leds_matrix[]);
+
+/**
+ * 
+*/
+void matrix_animation_ligne(CRGB leds_matrix[], long color_clear, long color_draw);
 
 /**
  * Met toutes les leds en bleu

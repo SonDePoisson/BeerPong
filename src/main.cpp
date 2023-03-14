@@ -44,7 +44,7 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
     if (count < (score_1 + score_2))
     {
       strip_animation(leds_strip);
-      matrix_animation(leds_matrix);
+      matrix_animation_serpent(leds_matrix);
       if (i < NUM_SENSOR/2)
         score_1--;
       else
@@ -80,7 +80,8 @@ void loop() {
     score_2 = 6;
   } 
   print_US(leds_matrix, COlOR_1);
-  // matrix_animation(leds_matrix);
+  matrix_animation_serpent(leds_matrix);
+  matrix_animation_ligne(leds_matrix, COlOR_2, COlOR_1);
   // strip_ambient(leds_strip);
   // read_sensors(leds_matrix, leds_strip);
 }
