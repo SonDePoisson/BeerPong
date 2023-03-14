@@ -6,35 +6,156 @@
 
 #include "Beer_Pong_Matrix.h"
 
-//Dictionnaire pour defilement
-const PROGMEM int dico[27][6] = {
-		{0b01111110, 0b10010000, 0b10010000, 0b10010000, 0b01111110, 0b00000000},
-		{0b11111110, 0b10010010, 0b10010010, 0b10010010, 0b01111100, 0b00000000},
-		{0b01111100, 0b10000010, 0b10000010, 0b10000010, 0b01000100, 0b00000000},
-		{0b11111110, 0b10000010, 0b10000010, 0b10000010, 0b01111100, 0b00000000},
-		{0b11111110, 0b10010010, 0b10010010, 0b10010010, 0b10000010, 0b00000000},
-		{0b11111110, 0b10010000, 0b10010000, 0b10010000, 0b10000000, 0b00000000},
-		{0b01111100, 0b10000010, 0b10000010, 0b10001010, 0b10001110, 0b00000000},
-		{0b11111110, 0b00010000, 0b00010000, 0b00010000, 0b11111110, 0b00000000},
-		{0b00000000, 0b10000010, 0b11111110, 0b10000010, 0b00000000, 0b00000000},
-		{0b00000100, 0b00000010, 0b10000010, 0b11111100, 0b10000000, 0b00000000},
-		{0b11111110, 0b00010000, 0b00101000, 0b01000100, 0b10000010, 0b00000000},
-		{0b11111110, 0b00000010, 0b00000010, 0b00000010, 0b00000010, 0b00000000},
-		{0b11111110, 0b01100000, 0b00110000, 0b01100000, 0b11111110, 0b00000000},
-		{0b11111110, 0b01100000, 0b00110000, 0b00011000, 0b11111110, 0b00000000},
-		{0b01111100, 0b10000010, 0b10000010, 0b10000010, 0b01111100, 0b00000000},
-		{0b11111110, 0b10010000, 0b10010000, 0b10010000, 0b01100000, 0b00000000},
-		{0b01111100, 0b10000010, 0b10001010, 0b10000100, 0b01111010, 0b00000000},
-		{0b11111110, 0b10010000, 0b10010000, 0b10011000, 0b01100110, 0b00000000},
-		{0b01100100, 0b10010010, 0b10010010, 0b10010010, 0b01001100, 0b00000000},
-		{0b10000000, 0b10000000, 0b11111110, 0b10000000, 0b10000000, 0b00000000},
-		{0b11111100, 0b00000010, 0b00000010, 0b00000010, 0b11111100, 0b00000000},
-		{0b11100000, 0b00111000, 0b00001110, 0b00111000, 0b11100000, 0b00000000},
-		{0b11111000, 0b00001110, 0b00111000, 0b00001110, 0b11111000, 0b00000000},
-		{0b11000110, 0b00101000, 0b00010000, 0b00101000, 0b11000110, 0b00000000},
-		{0b11100000, 0b00010000, 0b00011110, 0b00010000, 0b11100000, 0b00000000},
-		{0b10000110, 0b10001010, 0b10010010, 0b10100010, 0b11000010, 0b00000000},
-		{0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000}
+long couleurs[148] = 
+{
+  CRGB::AliceBlue,
+  CRGB::Amethyst,
+  CRGB::AntiqueWhite,
+  CRGB::Aqua,
+  CRGB::Aquamarine,
+  CRGB::Azure,
+  CRGB::Beige,
+  CRGB::Bisque,
+  CRGB::Black,
+  CRGB::BlanchedAlmond,
+  CRGB::Blue,
+  CRGB::BlueViolet,
+  CRGB::Brown,
+  CRGB::BurlyWood,
+  CRGB::CadetBlue,
+  CRGB::Chartreuse,
+  CRGB::Chocolate,
+  CRGB::Coral,
+  CRGB::CornflowerBlue,
+  CRGB::Cornsilk,
+  CRGB::Crimson,
+  CRGB::Cyan,
+  CRGB::DarkBlue,
+  CRGB::DarkCyan,
+  CRGB::DarkGoldenrod,
+  CRGB::DarkGray,
+  CRGB::DarkGrey,
+  CRGB::DarkGreen,
+  CRGB::DarkKhaki,
+  CRGB::DarkMagenta,
+  CRGB::DarkOliveGreen,
+  CRGB::DarkOrange,
+  CRGB::DarkOrchid,
+  CRGB::DarkRed,
+  CRGB::DarkSalmon,
+  CRGB::DarkSeaGreen,
+  CRGB::DarkSlateBlue,
+  CRGB::DarkSlateGray,
+  CRGB::DarkSlateGrey,
+  CRGB::DarkTurquoise,
+  CRGB::DarkViolet,
+  CRGB::DeepPink,
+  CRGB::DeepSkyBlue,
+  CRGB::DimGray,
+  CRGB::DimGrey,
+  CRGB::DodgerBlue,
+  CRGB::FireBrick,
+  CRGB::FloralWhite,
+  CRGB::ForestGreen,
+  CRGB::Fuchsia,
+  CRGB::Gainsboro,
+  CRGB::GhostWhite,
+  CRGB::Gold,
+  CRGB::Goldenrod,
+  CRGB::Gray,
+  CRGB::Grey,
+  CRGB::Green,
+  CRGB::GreenYellow,
+  CRGB::Honeydew,
+  CRGB::HotPink,
+  CRGB::IndianRed,
+  CRGB::Indigo,
+  CRGB::Ivory,
+  CRGB::Khaki,
+  CRGB::Lavender,
+  CRGB::LavenderBlush,
+  CRGB::LawnGreen,
+  CRGB::LemonChiffon,
+  CRGB::LightBlue,
+  CRGB::LightCoral,
+  CRGB::LightCyan,
+  CRGB::LightGoldenrodYellow,
+  CRGB::LightGreen,
+  CRGB::LightGrey,
+  CRGB::LightPink,
+  CRGB::LightSalmon,
+  CRGB::LightSeaGreen,
+  CRGB::LightSkyBlue,
+  CRGB::LightSlateGray,
+  CRGB::LightSlateGrey,
+  CRGB::LightSteelBlue,
+  CRGB::LightYellow,
+  CRGB::Lime,
+  CRGB::LimeGreen,
+  CRGB::Linen,
+  CRGB::Magenta,
+  CRGB::Maroon,
+  CRGB::MediumAquamarine,
+  CRGB::MediumBlue,
+  CRGB::MediumOrchid,
+  CRGB::MediumPurple,
+  CRGB::MediumSeaGreen,
+  CRGB::MediumSlateBlue,
+  CRGB::MediumSpringGreen,
+  CRGB::MediumTurquoise,
+  CRGB::MediumVioletRed,
+  CRGB::MidnightBlue,
+  CRGB::MintCream,
+  CRGB::MistyRose,
+  CRGB::Moccasin,
+  CRGB::NavajoWhite,
+  CRGB::Navy,
+  CRGB::OldLace,
+  CRGB::Olive,
+  CRGB::OliveDrab,
+  CRGB::Orange,
+  CRGB::OrangeRed,
+  CRGB::Orchid,
+  CRGB::PaleGoldenrod,
+  CRGB::PaleGreen,
+  CRGB::PaleTurquoise,
+  CRGB::PaleVioletRed,
+  CRGB::PapayaWhip,
+  CRGB::PeachPuff,
+  CRGB::Peru,
+  CRGB::Pink,
+  CRGB::Plaid,
+  CRGB::Plum,
+  CRGB::PowderBlue,
+  CRGB::Purple,
+  CRGB::Red,
+  CRGB::RosyBrown,
+  CRGB::RoyalBlue,
+  CRGB::SaddleBrown,
+  CRGB::Salmon,
+  CRGB::SandyBrown,
+  CRGB::SeaGreen,
+  CRGB::Seashell,
+  CRGB::Sienna,
+  CRGB::Silver,
+  CRGB::SkyBlue,
+  CRGB::SlateBlue,
+  CRGB::SlateGray,
+  CRGB::SlateGrey,
+  CRGB::Snow,
+  CRGB::SpringGreen,
+  CRGB::SteelBlue,
+  CRGB::Tan,
+  CRGB::Teal,
+  CRGB::Thistle,
+  CRGB::Tomato,
+  CRGB::Turquoise,
+  CRGB::Violet,
+  CRGB::Wheat,
+  CRGB::White,
+  CRGB::WhiteSmoke,
+  CRGB::Yellow,
+  CRGB::YellowGreen
 };
 
 // XYMatrix Fonctions //
@@ -43,7 +164,7 @@ void setup_matrix(CRGB leds_matrix[]) //ToTest
 {
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds_matrix, NUM_LEDS_MATRIX).setCorrection(TypicalSMD5050);
   FastLED.setBrightness( BRIGHTNESS );
-  clear_matrix(leds_matrix);
+  clear_matrix(leds_matrix, COlOR_2);
   FastLED.show();
 }
 
@@ -399,18 +520,18 @@ static void print_6_2(CRGB leds_matrix[])
   }  
 }
 
-void clear_matrix(CRGB leds_matrix[])
+void clear_matrix(CRGB leds_matrix[], long color)
 {
   for (int i = 0; i < NUM_LEDS_MATRIX; i++)
   {
-    leds_matrix[i]  = COlOR_2;
+    leds_matrix[i]  = color;
   }
 }
 
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 {
   // Reset de la matrice de Bleu //
-  clear_matrix(leds_matrix);
+  clear_matrix(leds_matrix, COlOR_2);
   
   // Score Equipe 2 //
   switch (score_1)
@@ -484,38 +605,38 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 
 
 // ANIMATION //
-void print_US(CRGB leds_matrix[])
+void print_US(CRGB leds_matrix[], long color)
 {
   for (int j = 0; j < 17; j++)
   {
-    clear_matrix(leds_matrix);
+    clear_matrix(leds_matrix, COlOR_2);
     // Lettre U //
     for (int i = 0; i < 8; i++)
     {
-      leds_matrix[getLed(i, 0+j)] = COlOR_1;
-      leds_matrix[getLed(i, 1+j)] = COlOR_1;
-      leds_matrix[getLed(i, 5+j)] = COlOR_1;
-      leds_matrix[getLed(i, 6+j)] = COlOR_1;
+      leds_matrix[getLed(i, 0+j)] = color;
+      leds_matrix[getLed(i, 1+j)] = color;
+      leds_matrix[getLed(i, 5+j)] = color;
+      leds_matrix[getLed(i, 6+j)] = color;
     }
     for (int i = 0+j; i < 7+j; i++)
     {
-      leds_matrix[getLed(7, i)] = COlOR_1;
-      leds_matrix[getLed(6, i)] = COlOR_1;
+      leds_matrix[getLed(7, i)] = color;
+      leds_matrix[getLed(6, i)] = color;
     }
     
     // Lettre S //
-    leds_matrix[getLed(2, 9+j)] = COlOR_1;
-    leds_matrix[getLed(2, 10+j)] = COlOR_1;
-    leds_matrix[getLed(5, 14+j)] = COlOR_1;
-    leds_matrix[getLed(5, 15+j)] = COlOR_1;
+    leds_matrix[getLed(2, 9+j)]  = color;
+    leds_matrix[getLed(2, 10+j)] = color;
+    leds_matrix[getLed(5, 14+j)] = color;
+    leds_matrix[getLed(5, 15+j)] = color;
     for (int i = 9+j; i < 16+j; i++)
     {
-      leds_matrix[getLed(0, i)] = COlOR_1;
-      leds_matrix[getLed(1, i)] = COlOR_1;
-      leds_matrix[getLed(3, i)] = COlOR_1;
-      leds_matrix[getLed(4, i)] = COlOR_1;
-      leds_matrix[getLed(6, i)] = COlOR_1;
-      leds_matrix[getLed(7, i)] = COlOR_1;
+      leds_matrix[getLed(0, i)] = color;
+      leds_matrix[getLed(1, i)] = color;
+      leds_matrix[getLed(3, i)] = color;
+      leds_matrix[getLed(4, i)] = color;
+      leds_matrix[getLed(6, i)] = color;
+      leds_matrix[getLed(7, i)] = color;
     }
     FastLED.show();
     delay(250);
@@ -524,18 +645,5 @@ void print_US(CRGB leds_matrix[])
 
 void matrix_animation(CRGB leds_matrix[])
 {
-
-  for (int i = 0; i < NUM_LEDS_MATRIX; i+=8)  //Effet Balayage
-  {
-
-    clear_matrix(leds_matrix);
-    print_US(leds_matrix);
-    delay(100);
-
-    // for (int j = 0; j < 8; i++)
-    // {
-    //   leds_matrix[i+j]  = COlOR_1;
-    // }
-    // FastLED.show();
-  }
+  
 }

@@ -63,7 +63,7 @@ void setup() {
   setup_strip(leds_strip);
   setup_matrix(leds_matrix);
   // Print US //
-  // matrix_animation(leds_matrix);
+  print_US(leds_matrix, COlOR_1);
 }
 
 void loop() {
@@ -79,7 +79,7 @@ void loop() {
     score_1 = 0;
     score_2 = 6;
   } 
-  print_US(leds_matrix);
+  print_US(leds_matrix, COlOR_1);
   // matrix_animation(leds_matrix);
   // strip_ambient(leds_strip);
   // read_sensors(leds_matrix, leds_strip);
