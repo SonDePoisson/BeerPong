@@ -17,8 +17,10 @@ CRGB leds_strip[NUM_LEDS_STRIP];
 CRGB leds_matrix[NUM_LEDS_MATRIX];
 
 // Scores //
-uint8_t score_1 = 0;
+uint8_t score_1 = 6;
 uint8_t score_2 = 6;
+
+
 
 
 // Sensors Functions //
@@ -31,27 +33,43 @@ uint8_t score_2 = 6;
 */
 void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
 {
-  uint8_t count = 0;
+  uint8_t count_1 = 0;
+  uint8_t count_2 = 0;
 
-  for (int i = 0; i < NUM_SENSOR; i++)
+  for (int i = 0; i <= NUM_SENSOR/2; i++)
   {
-    // Compte des capteurs recouvert //
-    if((analogRead(A0 + i) > 0) && (analogRead(A0 + i) < 256))
+    // Compte des capteurs recouvert Equipe 1 //
+    if(analogRead(A0 + i) > 570)
     {
-      count++;
+      count_1++;
+      // Serial.println("Equipe 1");
+      // Serial.println(analogRead(A0 + i));
     }
-    // Comparaison Capteurs recouverts avec score pour mettre à jour //
-    if (count < (score_1 + score_2))
-    {
-      strip_animation(leds_strip);
-      matrix_animation_serpent(leds_matrix, COlOR_1);
-      if (i < NUM_SENSOR/2)
-        score_1--;
-      else
-        score_2--;
-    }
-    count = 0;
   }
+  // for (int i = (NUM_SENSOR/2)+1; i <= NUM_SENSOR; i++)
+  // {
+  //   // Compte des capteurs recouvert Equipe 2 //
+  //   if(analogRead(A0 + i) > 570)
+  //   {
+  //     count_2++;
+  //     // Serial.println("Equipe 2");
+  //     // Serial.println(analogRead(A0 + i));
+  //   }
+  // }
+
+  if(count_1 > 1) count_1 = 1; // Pour les test
+  Serial.println(analogRead(A2));
+
+  // Comparaison Capteurs recouverts avec score pour mettre à jour //
+  if ((count_1 + count_2) < (score_1 + score_2))
+  {
+    // strip_animation(leds_strip);
+    matrix_animation_serpent(leds_matrix, COlOR_1);
+    // matrix_animation_ligne(leds_matrix, COlOR_2, COlOR_1);
+    print_US(leds_matrix, COlOR_1);
+  }
+  score_1 = count_1;
+  score_2 = count_2;
 }
 
 // Main //
@@ -67,21 +85,13 @@ void setup() {
 }
 
 void loop() {
-  // Serial.print("Testing connection\n");
-  // delay(1000);
-  // clear_matrix(leds_matrix);
+  // Serial.print("Score 1: ");
+  // Serial.println(score_1);
+  // Serial.print("Score 2: ");
+  // Serial.println(score_2);
+
+  read_sensors(leds_matrix, leds_strip);
+  clear_matrix(leds_matrix, COlOR_2);
   print_score(score_1, score_2, leds_matrix);
-  delay(3000);
-  score_1++;
-  score_2--;
-  if (score_1 > 6)
-  {
-    score_1 = 0;
-    score_2 = 6;
-  } 
-  print_US(leds_matrix, COlOR_1);
-  matrix_animation_serpent(leds_matrix, COlOR_1);
-  matrix_animation_ligne(leds_matrix, COlOR_2, COlOR_1);
-  // strip_ambient(leds_strip);
-  // read_sensors(leds_matrix, leds_strip);
+  delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
 }
