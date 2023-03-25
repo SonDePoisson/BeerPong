@@ -92,9 +92,8 @@ void loop() {
 
   strip_ambient(leds_strip, COlOR_1, COlOR_2);
   
-
-  // read_sensors(leds_matrix, leds_strip);
-  // clear_matrix(leds_matrix, COlOR_2);
-  // print_score(score_1, score_2, leds_matrix);
-  // delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
+  read_sensors(leds_matrix, leds_strip);
+  clear_matrix(leds_matrix, COlOR_2);
+  print_score(score_1, score_2, leds_matrix);
+  delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
 }
