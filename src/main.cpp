@@ -58,7 +58,7 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
   // }
 
   if(count_1 > 1) count_1 = 1; // Pour les test
-  Serial.println(analogRead(A2));
+  Serial.println(analogRead(A7));
 
   // Comparaison Capteurs recouverts avec score pour mettre à jour //
   if ((count_1 + count_2) < (score_1 + score_2))
@@ -78,8 +78,8 @@ void setup() {
   Serial.begin(BAUD);
   Serial.print("Hello World\n");
   // LED Init //
-  setup_strip(leds_strip);
   setup_matrix(leds_matrix);
+  setup_strip(leds_strip);
   // Print US //
   // print_US(leds_matrix, COlOR_1);
 }
@@ -90,8 +90,11 @@ void loop() {
   // Serial.print("Score 2: ");
   // Serial.println(score_2);
 
-  read_sensors(leds_matrix, leds_strip);
-  clear_matrix(leds_matrix, COlOR_2);
-  print_score(score_1, score_2, leds_matrix);
-  delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
+  strip_ambient(leds_strip, COlOR_1, COlOR_2);
+  
+
+  // read_sensors(leds_matrix, leds_strip);
+  // clear_matrix(leds_matrix, COlOR_2);
+  // print_score(score_1, score_2, leds_matrix);
+  // delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
 }

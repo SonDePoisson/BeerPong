@@ -5,7 +5,7 @@
 #define COLOR_ORDER GRB
 #define CHIPSET     WS2812B
 
-#define BRIGHTNESS 32 //Choose between 0 -> 64
+#define BRIGHTNESS 64 //Choose between 0 -> 64
 
 #define MID_LINE (6*8)
 #define LAST_LINE (12*8)
@@ -17,8 +17,8 @@
 #define COLUMN_1 14
 #define COLUMN_2 (255 -8 -6)
 
-#define COlOR_1 CRGB :: DarkOrange
-#define COlOR_2 CRGB :: DarkBlue
+#define COlOR_1 CRGB :: DarkGreen
+#define COlOR_2 CRGB :: DarkViolet
 
 #define HIGH_MATRIX 32
 #define WIDTH 8
