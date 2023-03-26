@@ -5,7 +5,7 @@
 #define COLOR_ORDER GRB
 #define CHIPSET     WS2812B
 
-#define BRIGHTNESS 64 //Choose between 0 -> 64
+#define BRIGHTNESS 128 //Choose between 0 -> ??
 
 #define MID_LINE (6*8)
 #define LAST_LINE (12*8)
