@@ -11,7 +11,7 @@
 // Capteurs //
 #define NUM_SENSOR 12
 #define BAUD 9600
-#define RANGE 563
+#define RANGE 650
 
 // Leds //
 CRGB leds_strip[NUM_LEDS_STRIP];
@@ -43,8 +43,8 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
     if(analogRead(A0 + i) > RANGE)
     {
       count_1++;
-      Serial.println("Equipe 1");
-      Serial.println(analogRead(A0 + i));
+      // Serial.println("Equipe 1");
+      // Serial.println(analogRead(A0 + i));
     }
   }
   for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
@@ -53,8 +53,8 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
     if(analogRead(A0 + i) > RANGE)
     {
       count_2++;
-      Serial.println("Equipe 2");
-      Serial.println(analogRead(A0 + i));
+      // Serial.println("Equipe 2");
+      // Serial.println(analogRead(A0 + i));
     }
   }
 
@@ -64,7 +64,7 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
   // Comparaison Capteurs recouverts avec score pour mettre à jour //
   if ((count_1 + count_2) < (score_1 + score_2))
   {
-    matrix_animation_serpent(leds_matrix, COlOR_1); 
+    // matrix_animation_serpent(leds_matrix, COlOR_1);    //Décommenter
     print_US(leds_matrix, COlOR_1);
   }
   score_1 = count_1;
@@ -80,7 +80,7 @@ void setup() {
   setup_matrix(leds_matrix);
   setup_strip(leds_strip);
   // Print US //
-  // print_US(leds_matrix, COlOR_1);
+  print_US(leds_matrix, COlOR_1);            //Decommenter
 }
 
 void loop() {
@@ -89,10 +89,12 @@ void loop() {
   // Serial.print("Score 2: ");
   // Serial.println(score_2);
 
+   Serial.println(analogRead(A0));
+
   strip_ambient(leds_strip, COlOR_1, COlOR_2);
 
   read_sensors(leds_matrix, leds_strip);
   clear_matrix(leds_matrix, COlOR_2);
   print_score(score_1, score_2, leds_matrix);
-  delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
+  // delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
 }
