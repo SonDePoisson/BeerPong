@@ -9,6 +9,7 @@
 #define EQUIPE_2 2
 
 // Capteurs //
+#define START_SENSOR DATA_PIN + 1
 #define NUM_SENSOR 12
 #define BAUD 9600
 #define RANGE 650
@@ -32,6 +33,12 @@ uint8_t score_2 = 6;
  * - affiche les animations
  * - met à jour le score
 */
+void test_sensor(int sensor_pin)
+{
+  Serial.print("test_sensor: ");
+  Serial.println(digitalRead(sensor_pin));
+}
+
 void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
 {
   uint8_t count_1 = 0;
@@ -40,31 +47,23 @@ void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
   for (int i = 0; i < NUM_SENSOR/2; i++)
   {
     // Compte des capteurs recouvert Equipe 1 //
-    if(analogRead(A0 + i) > RANGE)
+    if(digitalRead(i + START_SENSOR) == 0) 
     {
       count_1++;
-      // Serial.println("Equipe 1");
-      // Serial.println(analogRead(A0 + i));
     }
   }
   for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
   {
     // Compte des capteurs recouvert Equipe 2 //
-    if(analogRead(A0 + i) > RANGE)
+    if(digitalRead(i + START_SENSOR) == 0)
     {
       count_2++;
-      // Serial.println("Equipe 2");
-      // Serial.println(analogRead(A0 + i));
     }
   }
-
-  // if(count_1 > 1) count_1 = 1; // Pour les test
-  // Serial.println(analogRead(A7));
 
   // Comparaison Capteurs recouverts avec score pour mettre à jour //
   if ((count_1 + count_2) < (score_1 + score_2))
   {
-    // matrix_animation_serpent(leds_matrix, COlOR_1);    //Décommenter
     print_US(leds_matrix, COlOR_1);
   }
   score_1 = count_1;
@@ -80,21 +79,26 @@ void setup() {
   setup_matrix(leds_matrix);
   setup_strip(leds_strip);
   // Print US //
-  print_US(leds_matrix, COlOR_1);            //Decommenter
+  print_US(leds_matrix, COlOR_1);       
 }
 
 void loop() {
-  // Serial.print("Score 1: ");
-  // Serial.println(score_1);
-  // Serial.print("Score 2: ");
-  // Serial.println(score_2);
 
-   Serial.println(analogRead(A0));
+  // for (int i = 0; i < NUM_SENSOR; i++)
+  // {
+  //   // Compte des capteurs recouvert Equipe 1 //
+  //   if(digitalRead(i + START_SENSOR) == LOW) 
+  //   {
+  //     test_sensor(i);
+  //     delay(500);
+  //   }
+  // }
+
+  // test_sensor(8);
+  delay(500);
 
   strip_ambient(leds_strip, COlOR_1, COlOR_2);
-
   read_sensors(leds_matrix, leds_strip);
   clear_matrix(leds_matrix, COlOR_2);
   print_score(score_1, score_2, leds_matrix);
-  // delay(1000);                                //Necessaire !! (à voir si on peut réduire le temps)
 }

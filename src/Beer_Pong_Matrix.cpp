@@ -607,6 +607,7 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
 // ANIMATION //
 void print_US(CRGB leds_matrix[], long color)
 {
+  int j = 8;
   for (int j = 0; j < 17; j++)
   {
     clear_matrix(leds_matrix, COlOR_2);

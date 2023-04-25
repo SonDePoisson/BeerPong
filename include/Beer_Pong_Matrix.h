@@ -1,5 +1,5 @@
 
-#define LED_PIN  3
+#define LED_PIN  2
 #define NUM_LEDS_MATRIX 256
 
 #define COLOR_ORDER GRB
