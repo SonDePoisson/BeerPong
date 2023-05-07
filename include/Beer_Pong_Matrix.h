@@ -59,17 +59,17 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]);
 /*
  * Permet d'écrire (en MAJUSCULE)
 */
-void print_letter(char letter, CRGB leds_matrix[], long color);
+void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color);
+
+/**
+ * Permet d'écrire un mot
+*/
+void print_word(char* word, CRGB leds_matrix[], long color);
 
 /**
  * 
 */
 void print_US(CRGB leds_matrix[], long color);
-
-/**
- * 
-*/
-void print_BAE(CRGB leds_matrix[], long color);
 
 /**
  * 

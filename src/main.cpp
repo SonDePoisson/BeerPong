@@ -110,7 +110,7 @@ void simu_matrix()
     for (int j = 0; j < HIGH_MATRIX; j++)
     {
       if (leds_matrix[getLed(i, j)] == COlOR_1)
-        printf("|");
+        printf("*");
       else
         printf(" ");
     }
@@ -121,9 +121,8 @@ void simu_matrix()
 int main()
 {
   printf("\n\n");
-
-  print_letter('a', leds_matrix, COlOR_1);
   
+  print_word("OPQR", leds_matrix, COlOR_1);
   simu_matrix();
 
   printf("\n\n");
