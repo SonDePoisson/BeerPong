@@ -17,8 +17,13 @@
 #define COLUMN_1 14
 #define COLUMN_2 (255 -8 -6)
 
-#define COlOR_1 CRGB :: DarkGreen
-#define COlOR_2 CRGB :: DarkViolet
+#ifdef RUN_ARDUINO
+    #define COlOR_1 CRGB :: DarkGreen
+    #define COlOR_2 CRGB :: DarkViolet
+#elif RUN_TEST
+    #define COlOR_1 1
+    #define COlOR_2 0
+#endif
 
 #define HIGH_MATRIX 32
 #define WIDTH 8
@@ -51,10 +56,20 @@ unsigned long getLed(int x, int y);
 */
 void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]);
 
+/*
+ * Permet d'écrire (en MAJUSCULE)
+*/
+void print_letter(char letter, CRGB leds_matrix[], long color);
+
 /**
  * 
 */
 void print_US(CRGB leds_matrix[], long color);
+
+/**
+ * 
+*/
+void print_BAE(CRGB leds_matrix[], long color);
 
 /**
  * 

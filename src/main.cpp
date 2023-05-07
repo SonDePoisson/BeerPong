@@ -1,5 +1,13 @@
-#include <Arduino.h>
-#include <FastLED.h>
+#ifdef RUN_ARDUINO
+  #include <Arduino.h>
+  #include <FastLED.h>
+#elif RUN_TEST
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <string.h>
+  #define CRGB int
+  #define uint8_t int
+#endif
 
 #include "Beer_Pong_Matrix.h"
 #include "Beer_Pong_Strip.h"
@@ -33,44 +41,47 @@ uint8_t score_2 = 6;
  * - affiche les animations
  * - met à jour le score
 */
-void test_sensor(int sensor_pin)
-{
-  Serial.print("test_sensor: ");
-  Serial.println(digitalRead(sensor_pin));
-}
-
-void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
-{
-  uint8_t count_1 = 0;
-  uint8_t count_2 = 0;
-
-  for (int i = 0; i < NUM_SENSOR/2; i++)
+#ifdef RUN_ARDUINO
+  void test_sensor(int sensor_pin)
   {
-    // Compte des capteurs recouvert Equipe 1 //
-    if(digitalRead(i + START_SENSOR) == 0) 
+    Serial.print("test_sensor: ");
+    Serial.println(digitalRead(sensor_pin));
+  }
+
+  void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
+  {
+    uint8_t count_1 = 0;
+    uint8_t count_2 = 0;
+
+    for (int i = 0; i < NUM_SENSOR/2; i++)
     {
-      count_1++;
+      // Compte des capteurs recouvert Equipe 1 //
+      if(digitalRead(i + START_SENSOR) == 0) 
+      {
+        count_1++;
+      }
     }
-  }
-  for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
-  {
-    // Compte des capteurs recouvert Equipe 2 //
-    if(digitalRead(i + START_SENSOR) == 0)
+    for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
     {
-      count_2++;
+      // Compte des capteurs recouvert Equipe 2 //
+      if(digitalRead(i + START_SENSOR) == 0)
+      {
+        count_2++;
+      }
     }
-  }
 
-  // Comparaison Capteurs recouverts avec score pour mettre à jour //
-  if ((count_1 + count_2) < (score_1 + score_2))
-  {
-    print_US(leds_matrix, COlOR_1);
+    // Comparaison Capteurs recouverts avec score pour mettre à jour //
+    if ((count_1 + count_2) < (score_1 + score_2))
+    {
+      print_US(leds_matrix, COlOR_1);
+    }
+    score_1 = count_1;
+    score_2 = count_2;
   }
-  score_1 = count_1;
-  score_2 = count_2;
-}
+#endif 
 
-// Main //
+
+#ifdef RUN_ARDUINO
 void setup() {
   // Init Com Capteurs //
   Serial.begin(BAUD);
@@ -83,22 +94,40 @@ void setup() {
 }
 
 void loop() {
-
-  // for (int i = 0; i < NUM_SENSOR; i++)
-  // {
-  //   // Compte des capteurs recouvert Equipe 1 //
-  //   if(digitalRead(i + START_SENSOR) == LOW) 
-  //   {
-  //     test_sensor(i);
-  //     delay(500);
-  //   }
-  // }
-
-  // test_sensor(8);
   delay(500);
-
   strip_ambient(leds_strip, COlOR_1, COlOR_2);
   read_sensors(leds_matrix, leds_strip);
   clear_matrix(leds_matrix, COlOR_2);
   print_score(score_1, score_2, leds_matrix);
 }
+
+#elif RUN_TEST
+// Simule la matrice led //
+void simu_matrix()
+{ 
+  for (int i = 0; i < WIDTH; i++)
+  {
+    for (int j = 0; j < HIGH_MATRIX; j++)
+    {
+      if (leds_matrix[getLed(i, j)] == COlOR_1)
+        printf("|");
+      else
+        printf(" ");
+    }
+    printf("\n");
+  }
+}
+
+int main()
+{
+  printf("\n\n");
+
+  print_letter('a', leds_matrix, COlOR_1);
+  
+  simu_matrix();
+
+  printf("\n\n");
+  return 0;
+}
+
+#endif

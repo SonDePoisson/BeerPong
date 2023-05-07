@@ -2,10 +2,17 @@
  * Inspiré de l'Exemple XYMatrix.ino de la librairie FastLED
 */
 
-#include <FastLED.h>
+#ifdef RUN_ARDUINO
+  #include <FastLED.h>
+#elif RUN_TEST
+  #include <stdio.h>
+  #define CRGB int
+  #define uint8_t int
+#endif
 
 #include "Beer_Pong_Matrix.h"
 
+#ifdef RUN_ARDUINO
 long couleurs[148] = 
 {
   CRGB::AliceBlue,
@@ -157,15 +164,18 @@ long couleurs[148] =
   CRGB::Yellow,
   CRGB::YellowGreen
 };
+#endif
 
 // XYMatrix Fonctions //
 
 void setup_matrix(CRGB leds_matrix[]) //ToTest
 {
+  #ifdef RUN_ARDUINO
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds_matrix, NUM_LEDS_MATRIX).setCorrection(TypicalSMD5050);
   FastLED.setBrightness( BRIGHTNESS );
   clear_matrix(leds_matrix, COlOR_2);
   FastLED.show();
+  #endif
 }
 
 unsigned long getLed(int x, int y) {
@@ -379,7 +389,7 @@ static void print_0_2(CRGB leds_matrix[])
     leds_matrix[START_LINE_2 - i*LONG_CORNER + SHORT_CORNER +1] = COlOR_1;
   }
 
-  for (size_t i = 17; i < 29; i++)
+  for (int i = 17; i < 29; i++)
   {
     leds_matrix[getLed(1, i)] = COlOR_1;
     leds_matrix[getLed(2, i)] = COlOR_1;
@@ -599,15 +609,141 @@ void print_score(uint8_t score_1, uint8_t score_2, CRGB leds_matrix[]) //ToTest
   default:
       break;
   }
-  FastLED.show();
+
+  #ifdef RUN_ARDUINO
+    FastLED.show();
+  #endif
 }
 
 
 
 // ANIMATION //
+
+const bool letter_pixels[26][8][8] = {
+    // définition de la lettre A 
+    {{0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 1, 0, 0, 1, 0, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0}},
+
+    // définition de la lettre B
+    {{0, 1, 1, 1, 1, 1, 0, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 1, 1, 1, 0, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 1, 1, 1, 1, 0, 0}},
+
+    // définition de la lettre C
+    {{0, 0 , 0, 1, 1, 1, 0, 0},
+    {0, 0, 1, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 1, 0},
+    {0, 0, 0, 1, 1, 1, 0, 0}},
+
+    // définition de la lettre D
+    {{0, 1, 1, 1, 1, 0, 0, 0},
+    {0, 1, 0, 0, 0, 1, 0, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 1, 0, 0},
+    {0, 1, 1, 1, 1, 0, 0, 0}},
+
+    // définition de la lettre E
+    {{0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0}},
+
+    // définition de la lettre F
+    {{0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 1, 1, 1, 1, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0}},
+
+    // définition de la lettre G
+    {{0, 0, 0, 1, 1, 1, 0, 0},
+    {0, 0, 1, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 0, 1, 0, 0, 0, 1, 0},
+    {0, 0, 0, 1, 1, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0}},
+
+    // définition de la lettre H
+    {{0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 0, 1, 0}},
+
+    // définition de la lettre I
+    {{0, 1, 1, 1, 1, 1, 1, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 1, 1, 1, 1, 1, 1, 0}},
+};
+
+void print_letter(char letter, CRGB leds_matrix[], long color) {
+  
+  int height_letter = 8;
+  int width_letter = 8;
+
+  if (letter >= 'a' && letter <= 'z')
+    letter -= 32;
+  
+  if (letter < 'A' || letter > 'Z')
+  {
+    #ifdef RUN_ARDUINO
+      Serial.printn("Letter Not Found");
+    #elif RUN_TEST
+      printf("Letter Not Found\n");
+    #endif
+  }
+  
+  for (int i = 0; i < width_letter; i++)
+  {
+    for (int j = 0; j < height_letter; j++)
+    {
+      if (letter_pixels[letter - 'A'][i][j] == 1)
+      {
+        leds_matrix[getLed(i, j)] = color;
+      } 
+    }
+  } 
+}
+
+
+
 void print_US(CRGB leds_matrix[], long color)
 {
-  int j = 8;
   for (int j = 0; j < 17; j++)
   {
     clear_matrix(leds_matrix, COlOR_2);
@@ -639,34 +775,59 @@ void print_US(CRGB leds_matrix[], long color)
       leds_matrix[getLed(6, i)] = color;
       leds_matrix[getLed(7, i)] = color;
     }
-    FastLED.show();
-    delay(150);
+    #ifdef RUN_ARDUINO
+      FastLED.show();
+      delay(150);
+    #endif
+  }
+}
+
+void print_BAE(CRGB leds_matrix[], long color)
+{
+  for (int j = 0; j < 8; j++)
+  {
+    clear_matrix(leds_matrix, COlOR_2);
+
+    // Print Letter // TODO
+
+
+    #ifdef RUN_ARDUINO
+      FastLED.show();
+      delay(150);
+    #endif
   }
 }
 
 void matrix_animation_serpent(CRGB leds_matrix[], long color)
 {
   clear_matrix(leds_matrix, COlOR_2);
-  FastLED.show();
-
+  #ifdef RUN_ARDUINO
+    FastLED.show();
+  #endif
   for (int i = 0; i < NUM_LEDS_MATRIX; i++)
   {
     leds_matrix[i] = color;
-    FastLED.show();
+    #ifdef RUN_ARDUINO
+      FastLED.show();
+    #endif
   }
 }
 
 void matrix_animation_ligne(CRGB leds_matrix[], long color_clear, long color_draw)
 {
   clear_matrix(leds_matrix, color_clear);
-  FastLED.show();
+  #ifdef RUN_ARDUINO
+    FastLED.show();
+  #endif
 
   for (int i = 0; i < HIGH_MATRIX+8; i++)
   {
     for (int j = 0; j < i+1; j++)
     {
       leds_matrix[(getLed(i-j, j))] = color_draw;
-      FastLED.show();
+      #ifdef RUN_ARDUINO
+        FastLED.show();
+      #endif
     }
     
   }

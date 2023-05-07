@@ -1,4 +1,9 @@
-#include <FastLED.h>
+#ifdef RUN_ARDUINO
+  #include <FastLED.h>
+#elif RUN_TEST
+  #define CRGB int
+  #define uint8_t int
+#endif
 
 #include "Beer_Pong_Strip.h"
 
@@ -6,7 +11,9 @@
 
 void setup_strip(CRGB leds[])
 {
-    FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS_STRIP);
+    #ifdef RUN_ARDUINO
+        FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS_STRIP);
+    #endif
 }
 
 void strip_ambient(CRGB leds[], long color_1, long color_2)
@@ -18,8 +25,10 @@ void strip_ambient(CRGB leds[], long color_1, long color_2)
         else
         leds[i] = color_2;   
     }
-    delay(1000);
-    FastLED.show();
+    #ifdef RUN_ARDUINO
+        FastLED.show();
+        delay(1000);
+    #endif
 }
 
 void strip_animation(CRGB leds[], long color_1, long color_2)
@@ -30,6 +39,8 @@ void strip_animation(CRGB leds[], long color_1, long color_2)
             leds[i] = color_1;
         else
             leds[i] = color_2;
+        #ifdef RUN_ARDUINO
         FastLED.show();
+        #endif    
     }
 }
