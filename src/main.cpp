@@ -42,46 +42,44 @@ uint8_t score_2 = 6;
  * - met à jour le score
 */
 #ifdef RUN_ARDUINO
-  void test_sensor(int sensor_pin)
+void test_sensor(int sensor_pin)
+{
+  Serial.print("test_sensor: ");
+  Serial.println(digitalRead(sensor_pin));
+}
+
+void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
+{
+  uint8_t count_1 = 0;
+  uint8_t count_2 = 0;
+
+  for (int i = 0; i < NUM_SENSOR/2; i++)
   {
-    Serial.print("test_sensor: ");
-    Serial.println(digitalRead(sensor_pin));
+    // Compte des capteurs recouvert Equipe 1 //
+    if(digitalRead(i + START_SENSOR) == 0) 
+    {
+      count_1++;
+    }
+  }
+  for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
+  {
+    // Compte des capteurs recouvert Equipe 2 //
+    if(digitalRead(i + START_SENSOR) == 0)
+    {
+      count_2++;
+    }
   }
 
-  void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
+  // Comparaison Capteurs recouverts avec score pour mettre à jour //
+  if ((count_1 + count_2) < (score_1 + score_2))
   {
-    uint8_t count_1 = 0;
-    uint8_t count_2 = 0;
-
-    for (int i = 0; i < NUM_SENSOR/2; i++)
-    {
-      // Compte des capteurs recouvert Equipe 1 //
-      if(digitalRead(i + START_SENSOR) == 0) 
-      {
-        count_1++;
-      }
-    }
-    for (int i = (NUM_SENSOR/2); i < NUM_SENSOR; i++)
-    {
-      // Compte des capteurs recouvert Equipe 2 //
-      if(digitalRead(i + START_SENSOR) == 0)
-      {
-        count_2++;
-      }
-    }
-
-    // Comparaison Capteurs recouverts avec score pour mettre à jour //
-    if ((count_1 + count_2) < (score_1 + score_2))
-    {
-      print_US(leds_matrix, COlOR_1);
-    }
-    score_1 = count_1;
-    score_2 = count_2;
+    print_US(leds_matrix, COlOR_1);
   }
-#endif 
+  score_1 = count_1;
+  score_2 = count_2;
+}
 
 
-#ifdef RUN_ARDUINO
 void setup() {
   // Init Com Capteurs //
   Serial.begin(BAUD);
@@ -102,28 +100,19 @@ void loop() {
 }
 
 #elif RUN_TEST
-// Simule la matrice led //
-void simu_matrix()
-{ 
-  for (int i = 0; i < WIDTH; i++)
-  {
-    for (int j = 0; j < HIGH_MATRIX; j++)
-    {
-      if (leds_matrix[getLed(i, j)] == COlOR_1)
-        printf("*");
-      else
-        printf(" ");
-    }
-    printf("\n");
-  }
-}
 
 int main()
 {
   printf("\n\n");
   
-  print_word("OPQR", leds_matrix, COlOR_1);
-  simu_matrix();
+  for (size_t i = 0; i < 26; i++)
+  {
+    print_letter('A' + i, 0, leds_matrix, COlOR_1);
+    simu_matrix(leds_matrix);
+
+    clear_matrix(leds_matrix, COlOR_2);
+    printf("\n\n");
+  }
 
   printf("\n\n");
   return 0;

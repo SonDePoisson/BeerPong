@@ -37,6 +37,8 @@
 
 // XYMatrix functions //
 
+void simu_matrix(CRGB leds_matrix[]);
+
 /**
  * Instancie les Leds et la luminosité
 */
