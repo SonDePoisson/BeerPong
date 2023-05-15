@@ -105,14 +105,7 @@ int main()
 {
   printf("\n\n");
   
-  for (size_t i = 0; i < 26; i++)
-  {
-    print_letter('A' + i, 0, leds_matrix, COlOR_1);
-    simu_matrix(leds_matrix);
-
-    clear_matrix(leds_matrix, COlOR_2);
-    printf("\n\n");
-  }
+  print_word("KATE", 0, leds_matrix, COlOR_1);
 
   printf("\n\n");
   return 0;

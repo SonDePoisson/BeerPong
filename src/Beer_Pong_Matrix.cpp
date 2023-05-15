@@ -929,14 +929,20 @@ void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) {
   } 
 }
 
-void print_word(char word[], CRGB leds_matrix[], long color)
+void print_word(char word[], int start_pixel, CRGB leds_matrix[], long color)
 {
   for (int i = 0; i < strlen(word); i++)
   {
-    print_letter(word[i], i, leds_matrix, color);
+    print_letter(word[i], i + 8*start_pixel, leds_matrix, color);
   }
+  
+  simu_matrix(leds_matrix);
 }
 
+void defil_word(char word[], CRGB leds_matrix[], long color)
+{
+  
+}
 
 
 void print_US(CRGB leds_matrix[], long color)

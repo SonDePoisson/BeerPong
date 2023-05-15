@@ -66,7 +66,12 @@ void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color);
 /**
  * Permet d'écrire un mot
 */
-void print_word(char* word, CRGB leds_matrix[], long color);
+void print_word(char* word, int start_pixel, CRGB leds_matrix[], long color);
+
+/**
+ * Permet de faire défiler un mot
+*/
+void defil_word(char word[], CRGB leds_matrix[], long color);
 
 /**
  * 
