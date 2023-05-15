@@ -900,8 +900,7 @@ const bool letter_pixels[26][8][8] = {
      {0, 1, 1, 1, 1, 1, 1, 0}}
 };
 
-void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) {
-  
+void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) { // letter_idx != Start Pixel
   int height_letter = 8;
   int width_letter = 8;
 
@@ -931,17 +930,31 @@ void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) {
 
 void print_word(char word[], int start_pixel, CRGB leds_matrix[], long color)
 {
+  #ifdef RUN_ARDUINO
+    clear_matrix(leds_matrix, COlOR_2);
+  #elif RUN_TEST
+    printf("\n\nOK\n\n");
+  #endif
+
   for (int i = 0; i < strlen(word); i++)
   {
     print_letter(word[i], i + 8*start_pixel, leds_matrix, color);
   }
-  
-  simu_matrix(leds_matrix);
+
+  #ifdef RUN_ARDUINO
+    show_matrix(leds_matrix);
+    delay(100);
+  #elif RUN_TEST
+    simu_matrix(leds_matrix);
+  #endif
 }
 
 void defil_word(char word[], CRGB leds_matrix[], long color)
 {
-  
+  for (int i = 31; i >= 31 - strlen(word); i--)
+  {
+    print_word(word, i, leds_matrix, color);
+  }
 }
 
 

@@ -105,7 +105,8 @@ int main()
 {
   printf("\n\n");
   
-  print_word("KATE", 0, leds_matrix, COlOR_1);
+  print_word("Hey", 1, leds_matrix, COlOR_1);
+  // defil_word("Hey", leds_matrix, COlOR_1);
 
   printf("\n\n");
   return 0;
