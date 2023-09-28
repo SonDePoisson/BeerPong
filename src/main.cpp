@@ -42,12 +42,6 @@ uint8_t score_2 = 6;
  * - met à jour le score
 */
 #ifdef RUN_ARDUINO
-void test_sensor(int sensor_pin)
-{
-  Serial.print("test_sensor: ");
-  Serial.println(digitalRead(sensor_pin));
-}
-
 void read_sensors(CRGB leds_matrix[], CRGB leds_strip[])
 {
   uint8_t count_1 = 0;

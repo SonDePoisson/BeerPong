@@ -899,7 +899,7 @@ const bool letter_pixels[26][8][8] = {
      {0, 1, 1, 1, 1, 1, 1, 0},
      {0, 1, 1, 1, 1, 1, 1, 0}}
 };
-
+/*
 void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) { // letter_idx != Start Pixel
   int height_letter = 8;
   int width_letter = 8;
@@ -910,7 +910,7 @@ void print_letter(char letter, int letter_idx, CRGB leds_matrix[], long color) {
   if (letter < 'A' || letter > 'Z')
   {
     #ifdef RUN_ARDUINO
-      Serial.printn("Letter Not Found");
+      Serial.println("Letter Not Found");
     #elif RUN_TEST
       printf("Letter Not Found\n");
     #endif
@@ -956,7 +956,7 @@ void defil_word(char word[], CRGB leds_matrix[], long color)
     print_word(word, i, leds_matrix, color);
   }
 }
-
+*/
 
 void print_US(CRGB leds_matrix[], long color)
 {
